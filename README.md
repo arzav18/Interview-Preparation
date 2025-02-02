@@ -207,6 +207,12 @@ console.log(sum(1, 2, 3, 4, 5));  // Output: 15
 These **working code examples** cover the most commonly asked **frontend JavaScript** concepts. Let me know if you need **React examples** or **mock interview questions**! 🚀
 
 
+Here is the **JavaScript code** to fetch data from an API (`https://randomuser.me/api/`) without using React:
+
+---
+
+### **📌 JavaScript Code (without React)**
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -253,3 +259,107 @@ These **working code examples** cover the most commonly asked **frontend JavaScr
   </script>
 </body>
 </html>
+```
+
+---
+
+### **📌 How It Works:**
+1. When the page loads, it **fetches a random user** from the API (`https://randomuser.me/api/`).
+2. It displays:
+   - 👤 **User Name**
+   - 📧 **User Email**
+   - 🖼 **Profile Picture**
+3. The **"Fetch New User"** button fetches a new user when clicked.
+
+---
+
+### **📌 Steps to Run:**
+1. Create an `index.html` file.
+2. Paste the above code into the `index.html` file.
+3. Open the `index.html` file in a web browser.
+
+---
+
+Now you have a **pure JavaScript** solution that fetches data from the API and displays it on the page! 🎯
+
+
+Here’s a **simple React component** that fetches data from an API **without any CSS or extra styles**.  
+
+---
+
+### **📌 Full React Code**
+```jsx
+import React, { useState, useEffect } from "react";
+
+const RandomUser = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRandomUser = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("https://randomuser.me/api/");
+      const data = await response.json();
+      setUser(data.results[0]);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchRandomUser();
+  }, []);
+
+  return (
+    <div>
+      <h2>Random User</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : user ? (
+        <div>
+          <p>Name: {user.name.first} {user.name.last}</p>
+          <p>Email: {user.email}</p>
+          <img src={user.picture.medium} alt="User" />
+          <button onClick={fetchRandomUser}>Fetch New User</button>
+        </div>
+      ) : (
+        <p>Failed to load user.</p>
+      )}
+    </div>
+  );
+};
+
+export default RandomUser;
+```
+
+---
+
+### **📌 How It Works**
+1. **Fetches random user data** when the component mounts.
+2. **Displays**:
+   - 👤 Name
+   - 📧 Email
+   - 🖼 Profile Picture  
+3. **"Fetch New User" button** loads a new user.
+
+---
+
+### **📌 Usage**
+Replace `App.js` with:
+```jsx
+import React from "react";
+import RandomUser from "./RandomUser";
+
+const App = () => {
+  return (
+    <div>
+      <RandomUser />
+    </div>
+  );
+};
+
+export default App;
+```
+
+✅ **Now, run your React app** and see the API data! 🚀
