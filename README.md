@@ -205,3 +205,51 @@ console.log(sum(1, 2, 3, 4, 5));  // Output: 15
 
 ## **Final Thoughts**  
 These **working code examples** cover the most commonly asked **frontend JavaScript** concepts. Let me know if you need **React examples** or **mock interview questions**! 🚀
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random User API</title>
+</head>
+<body>
+  <h2>Random User</h2>
+  <div id="user-info">
+    <p>Loading...</p>
+  </div>
+  <button id="fetch-user">Fetch New User</button>
+
+  <script>
+    const userInfoDiv = document.getElementById("user-info");
+    const fetchUserButton = document.getElementById("fetch-user");
+
+    // Function to fetch random user data
+    const fetchRandomUser = async () => {
+      userInfoDiv.innerHTML = "<p>Loading...</p>";  // Show loading message
+      try {
+        const response = await fetch("https://randomuser.me/api/");
+        const data = await response.json();
+        const user = data.results[0];
+
+        // Update the user info in the HTML
+        userInfoDiv.innerHTML = `
+          <p>Name: ${user.name.first} ${user.name.last}</p>
+          <p>Email: ${user.email}</p>
+          <img src="${user.picture.medium}" alt="User" />
+        `;
+      } catch (error) {
+        userInfoDiv.innerHTML = "<p>Failed to load user.</p>";
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    // Fetch new user when button is clicked
+    fetchUserButton.addEventListener("click", fetchRandomUser);
+
+    // Fetch a random user when the page loads
+    fetchRandomUser();
+  </script>
+</body>
+</html>
